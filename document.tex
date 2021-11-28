@@ -1,0 +1,454 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pdftex]{graphicx}
+\usepackage{multicol}
+
+\date{November 2021}
+\title{Matrix Representation of Complex Variables}
+\author{Sahil Trivedi}
+
+\begin{document}
+    \maketitle
+
+    \section{Introduction}
+    Complex numbers are generally represented by the formula
+    $$z = a + ib \mid (a,b) \in \mathbb{R}  $$
+    However, they can also be represented as $2 X 2$ matrices.
+    $$z = \begin{bmatrix}
+        a & -b \\
+        b & a 
+    \end{bmatrix}$$
+    Using this representation we eliminate the necessity of using $i$ to denote the direction orthogonal to the $real$ axis. The $real$ and $imaginary$ axes on the complex planes are base vectors in an $R^2$ space.
+    Matrices of the form
+    $$\begin{bmatrix}
+        a & -b \\
+        b & a 
+    \end{bmatrix}  \mid (a,b) \in \mathbb{R} $$
+    form a set over which addition and multiplication is commutative, and division is defined for matrices with a non-zero determinant. The only condition under which the determinant of a matrix of this form becomes $0$ is if $a=0$ and $b=0$. The determinant is the square of the distance of the complex number from the origin of the complex plane. 
+    \\\\
+    Besides addition, multiplication, and division, we can also define exponents over this group.
+
+
+
+
+
+
+    \section{Logarithms of Complex Numbers}
+    Because the group is defined over the set
+    $$\begin{bmatrix}
+        x & -y \\
+        y & x 
+    \end{bmatrix} \mid (x,y) \in \mathbb{R} $$
+    A complex number raised to the power of another complex number can be denoted by
+    $$ z_{1}^{z_{2}} = {\begin{bmatrix} a_{1} & -b_{1} \\ b_{1} & a_{1}   \end{bmatrix}}^{\begin{bmatrix} a_{2} & -b_{2} \\ b_{2} & a_{2}   \end{bmatrix}}$$
+    In classical notation a complex number with unit magnitude can be described by
+    $$ e^{i\theta} = \cos{\theta} + i\sin{\theta}$$
+    In matrix representation, this is expressed as
+    $$ {\begin{bmatrix}
+        e & 0 \\
+        0 & e 
+    \end{bmatrix}}^{\begin{bmatrix}
+        0 & -1 \\
+        1 & 0 
+    \end{bmatrix}\begin{bmatrix}
+        \theta & 0 \\
+        0 & \theta 
+    \end{bmatrix}} = \begin{bmatrix}
+        \cos{\theta} & {-\sin{\theta}} \\
+        \sin{\theta} & \cos{\theta} 
+    \end{bmatrix} $$
+    $$\therefore {\begin{bmatrix}
+        e & 0 \\
+        0 & e 
+    \end{bmatrix}}^{\begin{bmatrix}
+        0 & -\theta \\
+        \theta & 0 
+    \end{bmatrix}} = \begin{bmatrix}
+        \cos{\theta} & {-\sin{\theta}} \\
+        \sin{\theta} & \cos{\theta} 
+    \end{bmatrix} $$
+    Taking the logarithm on both sides,
+    $$ \begin{bmatrix}
+        0 & -\theta \\
+        \theta & 0 
+    \end{bmatrix} = log(\begin{bmatrix}
+        \cos{\theta} & {-\sin{\theta}} \\
+        \sin{\theta} & \cos{\theta} 
+    \end{bmatrix})
+    $$
+    % At $\theta = \pi/2$
+    % $$
+    % log(\begin{bmatrix}
+    %     0 & -1 \\
+    %     1 & 0} 
+    % \end{bmatrix}) = \begin{bmatrix}
+    %     \pi/2 & 0 \\
+    %     0 & \pi/2
+    % \end{bmatrix}
+    % $$
+    We can make good use of this result while calculating logarithms. For any complex number $z$:
+    $$ z = re^{i\theta} = \begin{bmatrix}
+        r & 0 \\
+        0 & r 
+    \end{bmatrix} {\begin{bmatrix}
+        e & 0 \\
+        0 & e 
+    \end{bmatrix}} ^ {\begin{bmatrix}
+        0 & -\theta \\
+        \theta & 0
+    \end{bmatrix}} = \begin{bmatrix}
+        r & 0 \\
+        0 & r
+    \end{bmatrix} \begin{bmatrix}
+        \cos{\theta} & {-\sin{\theta}} \\
+        \sin{\theta} & \cos{\theta} 
+    \end{bmatrix}$$
+    We can represent $z$, $r$, and $\theta$ in terms of $a$ and $b$.
+    $$ r = \sqrt{a^2 + b^2} $$
+    $$ \cos{\theta} = \frac{a}{\sqrt{a^2 + b^2}} $$
+    $$ \sin{\theta} = \frac{b}{\sqrt{a^2 + b^2}} $$
+    $$ \therefore
+    z = \begin{bmatrix}
+        a & -b \\
+        b & a 
+    \end{bmatrix} = \sqrt{a^2 + b^2} \begin{bmatrix}
+        \frac{a}{\sqrt{a^2 + b^2}} & \frac{-b}{\sqrt{a^2 + b^2}} \\
+        \frac{b}{\sqrt{a^2 + b^2}} & \frac{a}{\sqrt{a^2 + b^2}}
+    \end{bmatrix} 
+    $$
+    Based on this conversion can derive a general expression for calculating logarithms for complex numbers
+    $$ log(z) = 
+    log \left(
+        \sqrt{a^2 + b^2} \begin{bmatrix}
+            \frac{a}{\sqrt{a^2 + b^2}} & \frac{-b}{\sqrt{a^2 + b^2}} \\
+            \frac{b}{\sqrt{a^2 + b^2}} & \frac{a}{\sqrt{a^2 + b^2}}
+        \end{bmatrix} 
+    \right)
+    $$ 
+    $$ \therefore log(z) = 
+    \frac{1}{2}log(a^2 + b^2) +
+    \begin{bmatrix}
+        0 & -\sin^{-1}\left({\frac{b}{\sqrt{a^2 + b^2}}}\right) \\
+        \sin^{-1}\left({\frac{b}{\sqrt{a^2 + b^2}}}\right) & 0
+    \end{bmatrix} 
+    $$
+    $$ \therefore log(z) = log(\begin{bmatrix}
+        a & -b \\
+        b & a
+    \end{bmatrix} ) = 
+    \begin{bmatrix}
+        \frac{1}{2}log(a^2 + b^2) & -\sin^{-1}\left({\frac{b}{\sqrt{a^2 + b^2}}}\right) \\
+        \sin^{-1}\left({\frac{b}{\sqrt{a^2 + b^2}}}\right) & \frac{1}{2}log(a^2 + b^2)
+    \end{bmatrix}
+    $$
+
+    \section{Exponents of Complex Numbers}
+    Given this result we can finally calculate exponents for matrices
+    $$ z_{1}^{z_{2}} = {\begin{bmatrix} a_{1} & -b_{1} \\ b_{1} & a_{1}   \end{bmatrix}}^{\begin{bmatrix} a_{2} & -b_{2} \\ b_{2} & a_{2}   \end{bmatrix}}$$
+    $$ \therefore
+    log(z_{1}^{z_{2}}) = \begin{bmatrix} a_{2} & -b_{2} \\ b_{2} & a_{2}   \end{bmatrix} log( \begin{bmatrix} a_{1} & -b_{1} \\ b_{1} & a_{1}   \end{bmatrix} )
+    $$
+    $$ \therefore
+    log(z_{1}^{z_{2}}) = \begin{bmatrix} a_{2} & -b_{2} \\ b_{2} & a_{2} \end{bmatrix}
+    \begin{bmatrix}
+        \frac{1}{2}log({a_{1}}^2 + {b_{1}}^2) & -\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) \\
+        \sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) & \frac{1}{2}log({a_{1}}^2 + {b_{1}}^2)
+    \end{bmatrix} 
+    $$
+    $$ \therefore log(z_{1}^{z_{2}}) = \begin{bmatrix} 
+        \frac{a_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {b_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) & - \frac{b_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) \\ 
+        \frac{b_2}{2}log({a_{1}}^2 + {b_{1}}^2) + {a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) & \frac{a_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {b_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)
+    \end{bmatrix}
+    $$
+    We decompose this matrix into it's real and imaginary components and write the $ z_{1}^{z_{2}} $ in the exponential form, such that:
+    $$ z_{1}^{z_{2}} = A \cdot B$$
+    where
+    $$ A = 
+    e^{
+        \begin{bmatrix} 
+            \frac{a_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {b_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) & 0 \\ 
+            0 & \frac{a_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {b_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)
+        \end{bmatrix}
+    } 
+    $$
+    $$ B = e^{
+        \begin{bmatrix} 
+            0 & - \frac{b_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) \\ 
+            \frac{b_2}{2}log({a_{1}}^2 + {b_{1}}^2) + {a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right) & 0
+        \end{bmatrix}
+    }
+    $$
+    $$ \therefore A = e^{\left(\frac{a_2}{2}log({a_{1}}^2 + {b_{1}}^2) - {b_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)\right)} $$
+    $$ \therefore A = \sqrt{{\left({a_1}^{2} + {b_1}^{2}\right)}^{a_2}} \cdot e^{- {b_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)}$$
+    $$ \therefore B = e^{\left(\left[
+        \frac{b_2}{2}log({a_{1}}^2 + {b_{1}}^2) + {a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)\right] \begin{bmatrix} 
+            0 & - 1 \\ 
+            1 & 0
+        \end{bmatrix}
+    \right)} $$
+    $$ \therefore
+    B = {\left(
+        e^{
+            \frac{b_2}{2}log({a_{1}}^2 + {b_{1}}^2) + {a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)
+        }
+    \right)}^{\begin{bmatrix} 
+        0 & - 1 \\ 
+        1 & 0
+    \end{bmatrix}}
+    $$
+    $$ \therefore B = 
+    {\left(
+        \sqrt{{\left({a_1}^{2} + {b_1}^{2}\right)}^{b_2}} \cdot
+        e^{{a_2}\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)}
+    \right)}^{i}
+    $$
+    Finally, we get the value of $ z_{1}^{z_{2}} $ 
+    $$ \therefore
+    z_{1}^{z_{2}} = \sqrt{{\left({a_1}^{2} + {b_1}^{2}\right)}^{\left(a_{2} + ib_{2}\right)}} \cdot
+    e^{\left((i{a_2} - b_{2})\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)\right)}
+    $$
+    $$ \therefore
+    z_{1}^{z_{2}} = \sqrt{{\left({a_1}^{2} + {b_1}^{2}\right)}^{\left(a_{2} + ib_{2}\right)}} \cdot
+    e^{\left(i({a_2} + ib_{2})\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)\right)}
+    $$
+    $$ \therefore
+    z_{1}^{z_{2}} = \sqrt{{\left({a_1}^{2} + {b_1}^{2}\right)}^{\left(a_{2} + ib_{2}\right)}} \cdot
+    {\left(e^{\left(i\sin^{-1}\left({\frac{b_1}{\sqrt{{a_1}^2 + {b_1}^2}}}\right)\right)}\right)}^{a_{2} + ib_{2}}
+    $$
+    $$ \therefore 
+    z_{1}^{z_{2}} = \sqrt{{\left({a_1}^{2} + {b_1}^{2}\right)}^{\left(a_{2} + ib_{2}\right)}} \cdot
+    {\left(\frac{a_{1}+ib_{1}}{\sqrt{{a_1}^2 + {b_1}^2}}\right)}^{a_{2} + ib_{2}}
+    $$
+    $$ \therefore
+    z_{1}^{z_{2}} = {\left(a_1 + ib_1\right)}^{a_{2} + ib_{2}}
+    $$
+
+    \section{So, Is there a solution?}
+    We do have a few techniques to find solutions of the form $z = a + ib$ for the value of $z_{1}^{z_{2}} = {\left(a_1 + ib_1\right)}^{a_{2} + ib_{2}}$.
+    Depending on the values of $a_1 , b_1 , a_2$ and $b_2$:
+    \subsection{a_1 = 0}
+    $$ z_{1}^{z_{2}} = {\left(ib_1\right)}^{a_{2} + ib_{2}}$$
+    $$ \therefore z_{1}^{z_{2}} = {i}^{a_2} \cdot {\left({i}^{i}\right)}^{b_2} \cdot {b_1}^{a_2} \cdot {\left({b_1}^{b_2}\right)}^{i}$$
+    $ {i}^{a_2} $ may or may not have a  real solution \\\\
+    $ {\left({i}^{i}\right)}^{b_2} $ is actually a real number because $ i^i $ has a real value (can you guess what it is?) \\\\
+    $ {b_1}^{a_2} $ is a real number \\\\
+    $ \left({b_1}^{b_2}\right)}^{i} $ may or may not have a real solution \\\\
+    Also note that $ i^i $ has multiple solutions due to $\sin$ and $\cos$ being modular transforms.
+    \subsection{b_1 = 0}
+    $$ z_{1}^{z_{2}} = {\left(a_1\right)}^{a_{2} + ib_{2}}$$
+    $$ \therefore z_{1}^{z_{2}} = {a_1}^{a_2} \cdot {\left({a_1}^{b_2}\right)}^{i} $$
+    While ${a_1}^{a_2}$ is real ${\left({a_1}^{b_2}\right)}^{i}$ may or may not be real.
+    \subsection{a_2 = 0}
+    $$ z_{1}^{z_{2}} = {\left(a_1 + ib_{1}\right)}^{ib_2}$$
+    We can convert the equation to an exponential form
+    $$ z_{1}^{z_{2}} = {z_1}^{ib_2} = e^{ib_{2} \cdot log(z_1)}$$
+    $$ \therefore z_{1}^{z_{2}} = \cos(ib_{2} \cdot log(z_1)) + i\sin(ib_{2} \cdot log(z_1))$$
+    Both of these terms may or may not be real. There are cases where $log(z_1)$ cancels out with $i$ or $b_2$ and the solution becomes easier to calculate. 
+    \\\\In any case you can always use the power series expansions of $e,sin(\theta)$ and $log(z)$ to compute the answers to the needed degree.
+    \subsection{b_2 = 0}
+    $$ z_{1}^{z_{2}} = {z_1}^{a_2}$$
+    $$ \therefore z_{1}^{z_{2}} = e^{a_{2}\cdot log(z_2)} = e^{i \cdot -a_{2}i\cdot log(z_2)}$$
+    $$ \therefore z_{1}^{z_{2}} = \cos(a_{2}i\cdot log(z_2)) - i\sin(a_{2}i\cdot log(z_2))$$
+    \subsection{How computers perform matrix exponentiation}
+    Computers mainly use the power series for functions like $e,sin(\theta)$ and $log(z)$.
+    $$ \therefore {z_1}^{z_2} = e^{z_2 \cdot log(z_1)} = e^{i \cdot -z_{2}i \cdot log(z_1)}$$
+    $$ \therefore {z_1}^{z_2} = \cos(z_{2}i \cdot log(z_1)) - i\sin(z_{2}i \cdot log(z_1))$$
+
+    \section{Conclusion}
+    We saw how complex numbers can be represented as matrices and how operations like logarithms and exponentiations can be achieved for complex numbers.
+    
+    
+    
+    
+    
+    % If we try to calculate the log of ${z_{1}}^{z_{2}}$, we get
+    % $$ log({z_{1}}^{z_{2}}) = 
+    % \begin{bmatrix}
+    %     a_{2} & -b_{2} \\
+    %     b_{2} & a_{2}
+    % \end{bmatrix}
+    % log(\begin{bmatrix}
+    %     a_{1} & -b_{1} \\
+    %     b_{1} & a_{1}
+    % \end{bmatrix})
+    % $$
+    % $$
+    % log(\begin{bmatrix}
+    %     a_{1} & -b_{1} \\
+    %     b_{1} & a_{1}
+    % \end{bmatrix}) = 
+    % log(\begin{bmatrix}
+    %     a_{1} & 0 \\
+    %     0 & a_{1}
+    % \end{bmatrix} + \begin{bmatrix}
+    %     0 & -b_{1} \\
+    %     b_{1} & 0
+    % \end{bmatrix})
+    % $$
+
+
+
+
+
+
+
+    % We define $r$ as the magnitude of $z_{1}$.
+    % $$ r = \sqrt{{a_{1}^{2} + {b_{1}}^{2}}}$$
+    % $$\therefore log({z_{1}}^{z_{2}}) = \begin{bmatrix}
+    %     a_{2} & -b_{2} \\
+    %     b_{2} & a_{2}
+    % \end{bmatrix}
+    % log(\begin{bmatrix}
+    %     r & 0 \\
+    %     0 & r
+    % \end{bmatrix} \begin{bmatrix}
+    %     \cos{\theta} & {-\sin{\theta}} \\
+    %     \sin{\theta} & \cos{\theta} 
+    % \end{bmatrix})$$
+    % $$\therefore log({z_{1}}^{z_{2}}) = \begin{bmatrix}
+    %     a_{2} & -b_{2} \\
+    %     b_{2} & a_{2}
+    % \end{bmatrix} \left[
+    %     log(\begin{bmatrix}
+    %         r & 0 \\
+    %         0 & r
+    %     \end{bmatrix})
+    %     +
+    %     log(\begin{bmatrix}
+    %         \cos{\theta} & -\sin{\theta} \\
+    %         \sin{\theta} & \cos{\theta}
+    %     \end{bmatrix})
+    % \right] $$
+    % $$ \therefore log({z_{1}}^{z_{2}}) = \begin{bmatrix}
+    %     a_{2} & -b_{2} \\
+    %     b_{2} & a_{2}
+    % \end{bmatrix} \left(
+    %     \begin{bmatrix}
+    %         log(r) & 0 \\
+    %         0 & log(r)
+    %     \end{bmatrix}
+    %     +
+    %     \begin{bmatrix}
+    %         0 & -\theta \\
+    %         \theta & 0
+    %     \end{bmatrix}
+    % \right) $$
+    % $$ 
+    % \therefore log({z_{1}}^{z_{2}}) = \begin{bmatrix}
+    %     a_{2} & -b_{2} \\
+    %     b_{2} & a_{2}
+    % \end{bmatrix}  \begin{bmatrix}
+    %     log(r) & -\theta \\
+    %     \theta & log(r)
+    % \end{bmatrix}
+    % $$
+    % $$
+    % \therefore log({z_{1}}^{z_{2}}) = \begin{bmatrix}
+    %     a_{2}log(r) - b_{2}\theta & -a_{2}\theta - b_{2}log(r) \\
+    %     a_{2}\theta + b_{2}log(r) & a_{2}log(r) - b_{2}\theta
+    % \end{bmatrix}   
+    % $$
+    % $$
+    % {z_{1}}^{z_{2}} = {\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     a_{2}log(r) - b_{2}\theta & -a_{2}\theta - b_{2}log(r) \\
+    %     a_{2}\theta + b_{2}log(r) & a_{2}log(r) - b_{2}\theta
+    % \end{bmatrix}}
+    % $$
+    % We separate the orthogonal components inside the exponents
+    % $$
+    % {z_{1}}^{z_{2}} = {\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\left(\begin{bmatrix}
+    %     a_{2}log(r) - b_{2}\theta & 0 \\
+    %     0 & a_{2}log(r) - b_{2}\theta
+    % \end{bmatrix} + \begin{bmatrix}
+    %     0 & -a_{2}\theta - b_{2}log(r) \\
+    %     a_{2}\theta + b_{2}log(r) & 0
+    % \end{bmatrix}\right)}
+    % $$
+    % $$ \therefore
+    % {z_{1}}^{z_{2}} = {\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     a_{2}log(r) - b_{2}\theta & 0 \\
+    %     0 & a_{2}log(r) - b_{2}\theta
+    % \end{bmatrix}} {\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     0 & -a_{2}\theta - b_{2}log(r) \\
+    %     a_{2}\theta + b_{2}log(r) & 0
+    % \end{bmatrix}}
+    % $$
+    % Assuming $a_{2}\theta + b_{2}log(r) = K$
+    % $$
+    % {z_{1}}^{z_{2}} = \begin{bmatrix}
+    %     \cos{K} & -\sin{K} \\
+    %     \sin{K} & \cos{K}
+    % \end{bmatrix}{\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     a_{2}log(r) - b_{2}\theta & 0 \\
+    %     0 & a_{2}log(r) - b_{2}\theta
+    % \end{bmatrix}} 
+    % $$
+    % $$
+    % \therefore 
+    % {z_{1}}^{z_{2}} = \frac{\begin{bmatrix}
+    %     \cos{K} & -\sin{K} \\
+    %     \sin{K} & \cos{K}
+    % \end{bmatrix}{\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     a_{2}log(r) & 0 \\
+    %     0 & a_{2}log(r)
+    % \end{bmatrix}}}{{\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     b_{2}\theta & 0 \\
+    %     0 & b_{2}\theta
+    % \end{bmatrix}}}
+    % $$
+    % $$
+    % \therefore {z_{1}}^{z_{2}} = r^{a_{2}}\frac{\begin{bmatrix}
+    %     \cos{K} & -\sin{K} \\
+    %     \sin{K} & \cos{K}
+    % \end{bmatrix}}{{\begin{bmatrix}
+    %     e & 0 \\
+    %     0 & e
+    % \end{bmatrix}}^{\begin{bmatrix}
+    %     b_{2}\theta & 0 \\
+    %     0 & b_{2}\theta
+    % \end{bmatrix}}}
+    % $$
+    % $$ \therefore {z_{1}}^{z_{2}} =
+    % r^{a_{2}} e^{b_{2}\theta} \begin{bmatrix}
+    %     \cos{K} & -\sin{K} \\
+    %     \sin{K} & \cos{K}
+    % \end{bmatrix}
+    % $$
+    % Next we need to evaluate the value of $K$. Recall that
+    % $$
+    % K = a_{2}\theta + b_{2}log(r)
+    % $$
+    % $$
+    % \therefore \cos{K} = \cos(a_{2}\theta + b_{2}log(r))
+    % $$$$
+    % \therefore \cos{K} = \cos({a_{2}\theta})\cos({b_{2}log(r)}) - \sin({a_{2}\theta})\sin({b_{2}log(r)})
+    % $$
+    % and
+    % $$
+    % \sin{K} = \sin{a_{2}\theta}\cos{b_{2}log(r)} + \sin{b_{2}log(r)}\cos{a_{2}\theta}
+    % $$
+
+\end{document}
